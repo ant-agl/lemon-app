@@ -1,26 +1,29 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
-];
+import { routes } from "./routes.js";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  linkActiveClass: "active",
+  linkExactActiveClass: "exact-active",
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  // let currentUser = !!localStorage.token;
+  // let isRequireAuth = to.meta?.auth || false;
+  // let isRequireNoAuth = to.meta?.noauth || false;
+  // if (isRequireAuth && !currentUser) {
+  //   next("/login");
+  // } else if (isRequireNoAuth && currentUser) {
+  //   next("/");
+  // } else {
+  let title = to.meta.title || "";
+  if (title != "") title += " | ";
+  title += "Лимон";
+  document.title = title;
+
+  next();
+  // }
 });
 
 export default router;
