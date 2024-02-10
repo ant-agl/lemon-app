@@ -22,13 +22,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../assets/Фон.svg'); 
+  background-image: url("../assets/Фон.svg");
   background-color: #24231f;
   background-size: cover;
   background-position: center;
-  opacity: 1; 
+  opacity: 1;
   z-index: -1;
 }
-
-
 </style>
