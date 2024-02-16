@@ -27,6 +27,7 @@
         <a href="/">
           <svg
             class="icon vk"
+
             width="42"
             height="42"
             viewBox="0 0 43 42"
@@ -41,7 +42,9 @@
       </div>
 
       <div class="input-container" :class="{ error: emailError }">
+
         <img src="../assets/icons/mail.svg" alt="Email Icon" class="input-icon" />
+
         <input type="email" placeholder="E-mail" v-model="email" />
       </div>
       <p class="error-message" v-if="emailError">{{ emailError }}</p>
@@ -285,11 +288,14 @@ button:hover {
   font-weight: 600;
   font-size: 12px;
 }
+
+
 .registration-text {
   font-weight: 600;
   font-size: 20px;
   margin-top: 30px;
 }
+
 .link {
   text-decoration: none;
   color: #878d28;
