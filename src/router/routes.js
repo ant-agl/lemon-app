@@ -10,6 +10,26 @@ export const routes = [
     component: () => import("@/views/LoginView.vue"),
   },
   {
+    path: "/register/",
+    name: "registration",
+    meta: {
+      title: "Регистрация",
+      layout: "auth",
+      noauth: true,
+    },
+    component: () => import("@/views/RegisterView.vue"),
+  },
+  {
+    path: "/forgot/",
+    name: "forgot",
+    meta: {
+      title: "Восстановление пароля",
+      layout: "auth",
+      noauth: true,
+    },
+    component: () => import("@/views/ForgotView.vue"),
+  },
+  {
     path: "/",
     name: "home",
     meta: {
