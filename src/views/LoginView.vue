@@ -1,7 +1,9 @@
 <template>
   <form @submit.prevent="sendForm">
-    <p class="title">Вход</p>
-    <p class="subtitle">Войдите, чтобы продолжить</p>
+    <div class="names-block">
+      <p class="title">Вход</p>
+      <p class="subtitle">Войдите, чтобы продолжить</p>
+    </div>
 
     <div class="icon-container">
       <a href="#">
@@ -14,34 +16,40 @@
         <IconVk />
       </a>
     </div>
-    <AppInput
-      placeholder="E-mail"
-      type="text"
-      :icon="require('@/assets/icons/emailicon.svg')"
-      :error="v$.email.$error"
-      :errorText="errorEmail"
-      v-model="email"
-    />
-    <AppInput
-      placeholder="Пароль"
-      type="password"
-      :icon="require('@/assets/icons/password.svg')"
-      :error="v$.password.$error"
-      :errorText="errorPassword"
-      v-model="password"
-    />
-    <p class="forgot-password">
-      <router-link to="/forgot" class="link">Забыли пароль?</router-link>
-    </p>
-    <AppBtn>Войти</AppBtn>
+    <div class="information-container">
+      <div class="fields-container">
+        <AppInput
+          placeholder="E-mail"
+          type="text"
+          :icon="require('@/assets/icons/emailicon.svg')"
+          :error="v$.email.$error"
+          :errorText="errorEmail"
+          v-model="email"
+        />
+        <AppInput
+          placeholder="Пароль"
+          type="password"
+          :icon="require('@/assets/icons/password.svg')"
+          :error="v$.password.$error"
+          :errorText="errorPassword"
+          v-model="password"
+        />
+      </div>
 
-    <p class="privacy-policy-text">
-      Авторизуясь, вы соглашаетесь с
-      <br />
-      <router-link to="/register" class="link">
-        правилами обработки персональных данных</router-link
-      >
-    </p>
+      <p class="forgot-password">
+        <router-link to="/forgot" class="link">Забыли пароль?</router-link>
+      </p>
+      <AppBtn>Войти</AppBtn>
+
+      <p class="privacy-policy-text">
+        Авторизуясь, вы соглашаетесь с
+        <br />
+        <router-link to="/register" class="link">
+          правилами обработки персональных данных</router-link
+        >
+      </p>
+    </div>
+
     <p class="registration-text">
       Еще нет аккаунта?
       <router-link to="/register" class="link">Зарегистрируйтесь</router-link>
@@ -117,11 +125,12 @@ export default {
 
 <style scoped>
 .forgot-password {
-  display: flex;
-  justify-content: flex-end;
   font-weight: 600;
   color: var(--secondary-color);
   font-size: 12px;
-  margin-top: -5px;
+  margin-top: -8px;
+  padding-right: 14px;
+  width: 100%;
+  text-align: right;
 }
 </style>

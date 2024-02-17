@@ -22,6 +22,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 30px;
   overflow-y: auto;
   background-image: url("@/assets/bg.svg");
   background-size: contain;
@@ -31,7 +33,6 @@
 
 .auth-form-container {
   max-width: 380px;
-  text-align: center;
   background-color: #fff;
   padding: 30px 80px;
   border-radius: 30px;
@@ -44,42 +45,65 @@
   @media (max-width: 375px) {
     padding: 10px 20px;
   }
+  :deep(form) {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+:deep(.information-container) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+:deep(.names-block) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
 
 :deep(.title) {
   font-size: 40px;
   font-weight: 600;
   font-family: "Jura", sans-serif;
-  margin: 0px;
   @media (max-width: 375px) {
     font-size: 30px;
   }
 }
+
 :deep(.subtitle) {
   font-size: 24px;
-  margin-top: 5px;
-  margin-bottom: 25px;
   @media (max-width: 375px) {
     font-size: 18px;
   }
+}
+:deep(.fields-container) {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
 :deep(.privacy-policy-text) {
   font-weight: 600;
   font-size: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 :deep(.registration-text) {
   font-weight: 600;
   font-size: 20px;
-  margin-top: 30px;
   @media (max-width: 375px) {
     font-size: 16px;
   }
 }
 
 :deep(.icon-container) {
-  margin-bottom: 25px;
   display: flex;
   justify-content: center;
   gap: 30px;

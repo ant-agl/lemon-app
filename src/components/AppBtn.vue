@@ -27,7 +27,6 @@ export default {
   width: 100%;
   height: 48px;
   font-weight: 600;
-  margin-top: 5px;
   &:hover {
     background-color: var(--main-color-hover);
   }

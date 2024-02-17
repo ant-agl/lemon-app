@@ -67,7 +67,6 @@ export default {
     display: flex;
     align-items: center;
     position: relative;
-    margin-bottom: 15px;
     border: none;
     border-radius: 30px;
     overflow: hidden;
