@@ -1,5 +1,8 @@
 <template>
   <div class="background-container">
+    <div class="logo">
+      <img src="@/assets/logo.svg" alt="Лого Лимон" />
+    </div>
     <router-view v-slot="{ Component, route }">
       <Transition appear>
         <div :key="route.name" class="auth-form-container">
@@ -11,6 +14,13 @@
 </template>
 
 <style scoped lang="scss">
+.logo {
+  width: 220px;
+  position: fixed;
+  z-index: 0;
+  top: 44px;
+  left: 56px;
+}
 .background-container {
   position: fixed;
   top: 0;
@@ -32,7 +42,8 @@
 }
 
 .auth-form-container {
-  max-width: 380px;
+  min-width: 400px;
+  max-width: 620px;
   background-color: #fff;
   padding: 30px 80px;
   border-radius: 30px;
@@ -75,6 +86,7 @@
 
 :deep(.subtitle) {
   font-size: 24px;
+  text-align: center;
   @media (max-width: 375px) {
     font-size: 18px;
   }
@@ -96,6 +108,7 @@
 }
 
 :deep(.registration-text) {
+  text-align: center;
   font-weight: 600;
   font-size: 20px;
   @media (max-width: 375px) {

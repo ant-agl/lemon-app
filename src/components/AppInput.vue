@@ -73,6 +73,9 @@ export default {
     background: var(--light-gray-color);
     width: 100%;
     transition: 0.2s;
+    &:focus-within {
+      background: #edf1b5;
+    }
   }
   input {
     flex: 1;
@@ -103,9 +106,7 @@ export default {
     color: var(--error-color);
     font-size: 12px;
     font-weight: 600;
-    margin-top: -10px;
-    margin-left: 20px;
-    text-align: left;
+    margin-left: 14px;
   }
 }
 </style>

@@ -30,6 +30,16 @@ export const routes = [
     component: () => import("@/views/ForgotView.vue"),
   },
   {
+    path: "/verify-link/",
+    name: "verify-link",
+    meta: {
+      title: "Верификация пароля",
+      layout: "auth",
+      noauth: true,
+    },
+    component: () => import("@/views/VerifyView.vue"),
+  },
+  {
     path: "/",
     name: "home",
     meta: {
