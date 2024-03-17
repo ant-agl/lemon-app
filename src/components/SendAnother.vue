@@ -6,6 +6,7 @@
       :class="{ disabled: isTimer }"
       @click.prevent="send"
     >
+      Отправить повторный код
       <span v-if="isTimer"> {{ minutes }}:{{ seconds }} </span>
     </a>
   </div>
@@ -16,7 +17,6 @@ export default {
   props: {
     startTime: Number,
     url: String,
-    dataSend: Object,
   },
   data: () => ({
     isTimer: true,
@@ -54,7 +54,7 @@ export default {
       this.time = this.startTime;
 
       // send data
-      console.log(this.url, this.dataSend);
+      console.log(this.url);
     },
   },
 };

@@ -27,7 +27,7 @@ export default {
   width: 100%;
   height: 48px;
   font-weight: 600;
-  transition: 0.3s;
+  transition: background-color 0.3s;
   &:hover {
     background-color: var(--main-color-hover);
   }

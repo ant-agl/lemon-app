@@ -1,25 +1,35 @@
 <template>
-  <div>
-    <BackLink link="/register" />
-    <h1>{{ $t("verifyTitle") }}</h1>
-  </div>
-  <form class="form" @submit.prevent="sendForm">
-    <InputsCode
-      :length="lengthCode"
-      v-model="code"
-      :isError="isErrorCode"
-      @input="isErrorCode = !code.length"
-    />
-    <SendAnother :startTime="60" :dataSend="$store.getters.userData" url="#" />
-    <AppBtn classes="btn_auth">{{ $t("verify") }}</AppBtn>
+  <form @submit.prevent="sendForm">
+    <div class="auth-header">
+      <p class="title">Подтверждение почты</p>
+      <p class="subtitle">Введите 6-значный код</p>
+    </div>
+
+    <div class="information-container">
+      <div class="fields-container">
+        <InputsCode
+          :length="lengthCode"
+          v-model="code"
+          :isError="isErrorCode"
+          @input="isErrorCode = !code.length"
+        />
+      </div>
+
+      <SendAnother :startTime="60" url="#" />
+
+      <AppBtn>Подтвердить</AppBtn>
+    </div>
+
+    <AppBtnBack />
   </form>
 </template>
 
 <script>
-import BackLink from "@/components/BackLink";
+import AppBtnBack from "@/components/AppBtnBack";
 import SendAnother from "@/components/SendAnother";
 import InputsCode from "@/components/InputsCode";
-import AppBtn from "@/components/App/AppBtn";
+import AppBtn from "@/components/AppBtn";
+
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
 
@@ -27,7 +37,7 @@ export default {
   setup: () => ({
     v$: useVuelidate(),
   }),
-  components: { BackLink, SendAnother, InputsCode, AppBtn },
+  components: { AppBtnBack, SendAnother, InputsCode, AppBtn },
   props: {
     userData: Object,
   },
@@ -42,11 +52,6 @@ export default {
         this.sendForm();
       }
     },
-  },
-  mounted() {
-    if (Object.keys(this.$store.getters.userData).length == 0) {
-      // this.$router.push("/register");
-    }
   },
   validations: {
     code: { required, minLength: minLength(6) },
@@ -77,9 +82,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.send-another {
-  margin-top: 8px;
-}
-</style>

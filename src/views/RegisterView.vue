@@ -71,6 +71,8 @@ import IconYandex from "@/components/icons/IconYandex";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, helpers } from "@vuelidate/validators";
 
+import api from "@/axios/api";
+
 const validName = (value) => {
   if (!helpers.req(value)) {
     return true;
@@ -136,11 +138,21 @@ export default {
 
       let data = {
         name: this.name,
-        email: this.email,
+        login: this.email,
         password: this.password,
       };
       console.log(data);
-      this.$router.push({ path: "/verify-link", query: { email: this.email } });
+
+      api
+        .post("/registration", data)
+        .then((response) => {
+          console.log("registration", response);
+
+          this.$router.push("/verify");
+        })
+        .catch((error) => {
+          console.log("registration error", error);
+        });
     },
   },
 };

@@ -125,7 +125,8 @@
 }
 
 :deep(.icon-container) {
-  display: flex;
+  // display: flex;
+  display: none;
   justify-content: center;
   gap: 30px;
 }

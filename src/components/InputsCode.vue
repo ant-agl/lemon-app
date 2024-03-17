@@ -64,27 +64,31 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .code {
   display: flex;
+  justify-content: center;
   gap: 16px;
 }
 .code__input {
-  width: 100%;
-  color: #212b36;
+  width: 15px;
   text-align: center;
   font-size: 16px;
   line-height: 24px;
-  padding: 12px 14px;
+  background: var(--light-gray-color);
+  color: #454444;
+  padding: 12px 20px;
   border-radius: 8px;
   border: 1px solid #919eab66;
+  transition: 0.2s;
 }
 .code__input:focus {
-  border-color: #0088ff;
+  background: #f8faca;
   outline: none;
 }
 .code__input.error {
-  border-color: #ff4842;
+  border-color: var(--error-color);
+  background-color: var(--error-bg);
   animation: error 0.2s linear both;
 }
 @keyframes error {

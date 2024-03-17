@@ -1,7 +1,8 @@
 <template>
   <div class="back-btn">
     <router-link :to="backLink" class="link">
-      <img src="@/assets/icons/back.svg" alt="" />Вернуться
+      <img src="@/assets/icons/back.svg" alt="" />
+      Вернуться
     </router-link>
   </div>
 </template>
@@ -16,23 +17,13 @@ export default {
   },
   computed: {
     backLink() {
-      return this.link || this.getPreviousRoute();
-    },
-  },
-  methods: {
-    getPreviousRoute() {
-      // Используем $route для получения предыдущего маршрута
-      const previousRoute = this.$route.meta.previousRoute;
+      if (this.link) return this.link;
 
-      // Если предыдущего маршрута нет, возвращаем главную страницу
-      return previousRoute ? previousRoute.fullPath : "/";
-    },
-  },
-  beforeRouteUpdate(to, from, next) {
-    // Сохраняем предыдущий маршрут в мета-данных текущего маршрута
-    this.$route.meta.previousRoute = from;
+      const back = this.$router.options.history.state.back;
+      if (back) return back;
 
-    next();
+      return "/";
+    },
   },
 };
 </script>

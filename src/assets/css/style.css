@@ -4,9 +4,14 @@ body * {
   padding: 0;
 }
 
+body *:focus-visible {
+  outline: 2px solid var(--secondary-color);
+}
+
 img {
   max-width: 100%;
 }
+
 :root {
   --main-color: #e7ef59;
   --main-color-hover: #c4cf03;
@@ -36,8 +41,13 @@ img {
   background-color: var(--secondary-color);
 }
 
-.link:hover::after {
+.link:not(.disabled):hover::after {
   width: 100%;
+}
+
+.link.disabled {
+  color: #919eabcc;
+  cursor: not-allowed;
 }
 
 .v-enter-active {
@@ -52,5 +62,3 @@ img {
 .v-leave-from {
   opacity: 0;
 }
-
-

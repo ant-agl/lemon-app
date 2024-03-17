@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "",
+  baseURL: "https://api.lemon-time.ru",
   headers: {
     "Content-Type": "application/json",
-    Authorization: "Basic " + localStorage.token ?? "",
+    "X-Auth-Token": localStorage.token ?? "",
   },
 });

@@ -18,10 +18,10 @@
           v-model="email"
         />
       </div>
+      <AppBtn>Отправить</AppBtn>
     </div>
 
-    <AppBtn>Отправить</AppBtn>
-    <AppBtnBack />
+    <AppBtnBack link="/login" />
   </form>
 </template>
 
@@ -71,7 +71,7 @@ export default {
         email: this.email,
       };
       console.log(data);
-      this.$router.push({ path: "/verify-link", query: { email: this.email } });
+      this.$router.push({ path: "/verify", query: { email: this.email } });
     },
   },
 };
