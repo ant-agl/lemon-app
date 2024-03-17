@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="sendForm">
-    <div class="names-block">
+    <div class="auth-header">
       <p class="title">Забыли пароль?</p>
       <p class="subtitle">
         Введите адрес электронной почты, на <br />который вы зарегистрировались
@@ -21,17 +21,14 @@
     </div>
 
     <AppBtn>Отправить</AppBtn>
-    <div class="back-btn">
-      <router-link to="/register" class="link"
-        ><img src="@/assets/icons/back.svg" alt="" />Вернуться</router-link
-      >
-    </div>
+    <AppBtnBack />
   </form>
 </template>
 
 <script>
 import AppBtn from "@/components/AppBtn";
 import AppInput from "@/components/AppInput";
+import AppBtnBack from "@/components/AppBtnBack";
 
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
@@ -43,6 +40,7 @@ export default {
   components: {
     AppBtn,
     AppInput,
+    AppBtnBack,
   },
   data() {
     return {
@@ -78,18 +76,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.back-btn {
-  display: flex;
-}
-.back-btn img {
-  margin-right: 7px;
-}
-.link {
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  font-size: 16px;
-}
-</style>

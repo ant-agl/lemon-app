@@ -1,33 +1,85 @@
 <template>
-  <form @submit.prevent="sendForm">
-    <div class="names-block">
-      <p class="title">Подтвердите E-mail</p>
-      <p class="subtitle">Мы отправили вам письмо на {{ email }}</p>
-    </div>
-    <AppBtn>Войти</AppBtn>
+  <div>
+    <BackLink link="/register" />
+    <h1>{{ $t("verifyTitle") }}</h1>
+  </div>
+  <form class="form" @submit.prevent="sendForm">
+    <InputsCode
+      :length="lengthCode"
+      v-model="code"
+      :isError="isErrorCode"
+      @input="isErrorCode = !code.length"
+    />
+    <SendAnother :startTime="60" :dataSend="$store.getters.userData" url="#" />
+    <AppBtn classes="btn_auth">{{ $t("verify") }}</AppBtn>
   </form>
 </template>
 
 <script>
-import AppBtn from "@/components/AppBtn";
+import BackLink from "@/components/BackLink";
+import SendAnother from "@/components/SendAnother";
+import InputsCode from "@/components/InputsCode";
+import AppBtn from "@/components/App/AppBtn";
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
 
 export default {
-  components: {
-    AppBtn,
+  setup: () => ({
+    v$: useVuelidate(),
+  }),
+  components: { BackLink, SendAnother, InputsCode, AppBtn },
+  props: {
+    userData: Object,
   },
-  data() {
-    return {
-      email: null,
-    };
+  data: () => ({
+    code: "",
+    isErrorCode: false,
+    lengthCode: 6,
+  }),
+  watch: {
+    code(code) {
+      if (code.length >= this.lengthCode) {
+        this.sendForm();
+      }
+    },
   },
-
-  created() {
-    this.email = this.$route.query.email;
+  mounted() {
+    if (Object.keys(this.$store.getters.userData).length == 0) {
+      // this.$router.push("/register");
+    }
+  },
+  validations: {
+    code: { required, minLength: minLength(6) },
   },
   methods: {
     sendForm() {
-      this.$router.push("/login");
+      if (this.v$.$invalid) {
+        this.isErrorCode = true;
+        this.code = "";
+        return;
+      }
+
+      let data = {
+        code: this.code,
+      };
+      console.log(data);
+
+      //send data
+      if (this.code == "123123") {
+        // success
+        this.$router.push("/");
+      } else {
+        //error
+        this.isErrorCode = true;
+        this.code = "";
+      }
     },
   },
 };
 </script>
+
+<style scoped>
+.send-another {
+  margin-top: 8px;
+}
+</style>

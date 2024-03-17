@@ -20,6 +20,13 @@
   z-index: 0;
   top: 44px;
   left: 56px;
+  @media (max-width: 768px) {
+    width: auto;
+    left: auto;
+  }
+  @media (max-width: 425px) {
+    top: 10px;
+  }
 }
 .background-container {
   position: fixed;
@@ -51,6 +58,7 @@
   font-weight: 300;
   overflow-y: auto;
   @media (max-width: 768px) {
+    min-width: auto;
     padding: 30px 50px;
   }
   @media (max-width: 375px) {
@@ -68,7 +76,7 @@
   align-items: center;
   gap: 15px;
 }
-:deep(.names-block) {
+:deep(.auth-header) {
   display: flex;
   flex-direction: column;
   align-items: center;

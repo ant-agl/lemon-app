@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="sendForm">
-    <div class="names-block">
+    <div class="auth-header">
       <p class="title">Регистрация</p>
       <p class="subtitle">Создайте новый аккаунт</p>
     </div>
@@ -140,7 +140,7 @@ export default {
         password: this.password,
       };
       console.log(data);
-      this.$router.push("/");
+      this.$router.push({ path: "/verify-link", query: { email: this.email } });
     },
   },
 };

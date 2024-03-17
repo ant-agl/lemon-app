@@ -6,7 +6,7 @@
         :type="currentType"
         :placeholder="placeholder"
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="handleInput($event.target.value)"
         :style="{ paddingLeft, paddingRight }"
       />
       <img
@@ -57,6 +57,9 @@ export default {
         this.currentType = "password";
       }
     },
+    handleInput(value) {
+      this.$emit("update:modelValue", value.trim());
+    },
   },
 };
 </script>
@@ -74,7 +77,7 @@ export default {
     width: 100%;
     transition: 0.2s;
     &:focus-within {
-      background: #edf1b5;
+      background: #f8faca;
     }
   }
   input {

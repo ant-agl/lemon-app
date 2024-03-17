@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="sendForm">
-    <div class="names-block">
+    <div class="auth-header">
       <p class="title">Вход</p>
       <p class="subtitle">Войдите, чтобы продолжить</p>
     </div>
