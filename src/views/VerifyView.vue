@@ -71,7 +71,9 @@ export default {
       this.$store
         .dispatch("confirmEmail", data)
         .then((response) => {
-          console.log("Email успешно подтвержден", response);
+          console.log("Email успешно подтвержден", response.data);
+          localStorage.token = response.data.data.token;
+
           this.$router.push("/");
         })
         .catch((error) => {

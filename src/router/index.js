@@ -9,21 +9,21 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // let currentUser = !!localStorage.token;
-  // let isRequireAuth = to.meta?.auth || false;
-  // let isRequireNoAuth = to.meta?.noauth || false;
-  // if (isRequireAuth && !currentUser) {
-  //   next("/login");
-  // } else if (isRequireNoAuth && currentUser) {
-  //   next("/");
-  // } else {
-  let title = to.meta.title || "";
-  if (title != "") title += " | ";
-  title += "Лимон";
-  document.title = title;
+  let currentUser = !!localStorage.token;
+  let isRequireAuth = to.meta?.auth || false;
+  let isRequireNoAuth = to.meta?.noauth || false;
+  if (isRequireAuth && !currentUser) {
+    next("/login");
+  } else if (isRequireNoAuth && currentUser) {
+    next("/");
+  } else {
+    let title = to.meta.title || "";
+    if (title != "") title += " | ";
+    title += "Лимон";
+    document.title = title;
 
-  next();
-  // }
+    next();
+  }
 });
 
 export default router;
