@@ -65,19 +65,20 @@ export default {
       }
 
       let data = {
+        login: this.$store.getters.userData.email,
         code: this.code,
       };
-      console.log(data);
-
-      //send data
-      if (this.code == "123123") {
-        // success
-        this.$router.push("/");
-      } else {
-        //error
-        this.isErrorCode = true;
-        this.code = "";
-      }
+      this.$store
+        .dispatch("confirmEmail", data)
+        .then((response) => {
+          console.log("Email успешно подтвержден", response);
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.error("Ошибка подтверждения email", error);
+          this.isErrorCode = true;
+          this.code = "";
+        });
     },
   },
 };

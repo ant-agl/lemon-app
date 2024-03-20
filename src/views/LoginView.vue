@@ -67,6 +67,8 @@ import IconYandex from "@/components/icons/IconYandex";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
 
+import api from "@/axios/api";
+
 export default {
   setup() {
     return { v$: useVuelidate() };
@@ -113,11 +115,20 @@ export default {
       }
 
       let data = {
-        email: this.email,
+        login: this.email,
         password: this.password,
       };
       console.log(data);
-      this.$router.push("/");
+      api
+        .post("/login", data)
+        .then((response) => {
+          console.log("login", response);
+
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.log("login error", error);
+        });
     },
   },
 };

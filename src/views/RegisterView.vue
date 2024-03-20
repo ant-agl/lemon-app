@@ -147,7 +147,7 @@ export default {
         .post("/registration", data)
         .then((response) => {
           console.log("registration", response);
-
+          this.$store.commit("setUserData", { email: this.email });
           this.$router.push("/verify");
         })
         .catch((error) => {
