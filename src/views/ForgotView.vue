@@ -12,13 +12,13 @@
         <AppInput
           placeholder="E-mail"
           type="text"
-          :icon="require('@/assets/icons/emailicon.svg')"
+          :icon="require('@/assets/img/icons/emailicon.svg')"
           :error="v$.email.$error"
           :errorText="errorEmail"
           v-model="email"
         />
       </div>
-      <AppBtn>Отправить</AppBtn>
+      <AppBtn class="full-w">Отправить</AppBtn>
     </div>
 
     <AppBtnBack link="/login" />
@@ -68,10 +68,16 @@ export default {
       }
 
       let data = {
-        email: this.email,
+        login: this.email,
       };
       console.log(data);
-      this.$router.push({ path: "/verify", query: { email: this.email } });
+
+      this.$store
+        .dispatch("passwordRecovery", data)
+        .then(() => {
+          this.$router.push("/verify");
+        })
+        .catch(() => {});
     },
   },
 };

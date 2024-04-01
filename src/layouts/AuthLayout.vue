@@ -1,7 +1,7 @@
 <template>
   <div class="background-container">
     <div class="logo">
-      <img src="@/assets/logo.svg" alt="Лого Лимон" />
+      <img src="@/assets/img/logo/1-light.png" alt="Лого Лимон" />
     </div>
     <router-view v-slot="{ Component, route }">
       <Transition appear>
@@ -42,7 +42,7 @@
   flex-direction: column;
   gap: 30px;
   overflow-y: auto;
-  background-image: url("@/assets/bg.svg");
+  background-image: url("@/assets/img/bg.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;

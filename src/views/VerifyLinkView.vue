@@ -4,7 +4,7 @@
       <p class="title">Подтвердите E-mail</p>
       <p class="subtitle">Мы отправили вам письмо на {{ email }}</p>
     </div>
-    <AppBtn>Войти</AppBtn>
+    <AppBtn class="full-w">Войти</AppBtn>
   </form>
 </template>
 

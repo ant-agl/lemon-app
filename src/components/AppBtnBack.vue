@@ -1,7 +1,7 @@
 <template>
   <div class="back-btn">
     <router-link :to="backLink" class="link">
-      <img src="@/assets/icons/back.svg" alt="" />
+      <img src="@/assets/img/icons/back.svg" alt="" />
       Вернуться
     </router-link>
   </div>

@@ -2,7 +2,7 @@
   <form @submit.prevent="sendForm">
     <div class="auth-header">
       <p class="title">Подтверждение почты</p>
-      <p class="subtitle">Введите 6-значный код</p>
+      <p class="subtitle">Введите 6-значный код с почты {{ userData.login }}</p>
     </div>
 
     <div class="information-container">
@@ -17,7 +17,7 @@
 
       <SendAnother :startTime="60" url="#" />
 
-      <AppBtn>Подтвердить</AppBtn>
+      <AppBtn class="full-w">Подтвердить</AppBtn>
     </div>
 
     <AppBtnBack />
@@ -30,6 +30,8 @@ import SendAnother from "@/components/SendAnother";
 import InputsCode from "@/components/InputsCode";
 import AppBtn from "@/components/AppBtn";
 
+import { mapGetters } from "vuex";
+
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
 
@@ -38,14 +40,14 @@ export default {
     v$: useVuelidate(),
   }),
   components: { AppBtnBack, SendAnother, InputsCode, AppBtn },
-  props: {
-    userData: Object,
-  },
   data: () => ({
     code: "",
     isErrorCode: false,
     lengthCode: 6,
   }),
+  computed: {
+    ...mapGetters(["userData"]),
+  },
   watch: {
     code(code) {
       if (code.length >= this.lengthCode) {
@@ -65,23 +67,21 @@ export default {
       }
 
       let data = {
-        login: this.$store.getters.userData.email,
+        login: this.userData.login,
         code: this.code,
       };
+      console.log(data);
+
       this.$store
         .dispatch("confirmEmail", data)
-        .then((response) => {
-          console.log("Email успешно подтвержден", response.data);
-          localStorage.token = response.data.data.token;
-
+        .then(() => {
           this.$router.push("/");
         })
-        .catch((error) => {
-          console.error("Ошибка подтверждения email", error);
-          this.isErrorCode = true;
-          this.code = "";
-        });
+        .catch(() => {});
     },
+  },
+  mounted() {
+    if (!this.userData.login) this.$router.push("/login");
   },
 };
 </script>

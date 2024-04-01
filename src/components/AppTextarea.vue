@@ -1,24 +1,11 @@
 <template>
   <div class="input" :class="{ error }">
     <label class="input__container">
-      <img v-if="icon" :src="icon" class="input__icon" />
-      <input
-        :type="currentType"
+      <textarea
         :placeholder="placeholder"
         :value="modelValue"
         @input="handleInput($event.target.value)"
-        :style="{ paddingLeft, paddingRight }"
-      />
-      <img
-        v-if="type == 'password'"
-        @click="togglePassword"
-        :src="
-          require(`@/assets/img/icons/${
-            currentType == 'password' ? 'close' : 'open'
-          }.svg`)
-        "
-        class="input__icon input__icon_password"
-      />
+      ></textarea>
     </label>
     <p v-if="error && errorText" class="input__error">{{ errorText }}</p>
   </div>
@@ -40,6 +27,7 @@ export default {
       currentType: this.type,
     };
   },
+
   computed: {
     paddingLeft() {
       return (this.icon ? 45 : 20) + "px";
@@ -66,7 +54,7 @@ export default {
 <style scoped lang="scss">
 .input {
   &.dark-bg {
-    input {
+    textarea {
       color: #fff;
     }
     .input__error {
@@ -88,7 +76,7 @@ export default {
       background: #f8faca;
     }
   }
-  input {
+  textarea {
     flex: 1;
     border: none;
     outline: none;
@@ -97,6 +85,8 @@ export default {
     color: #454444;
     font-size: 16px;
     line-height: 24px;
+    min-height: 100px;
+    max-height: 200px;
   }
   &__icon {
     position: absolute;

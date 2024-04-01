@@ -8,7 +8,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   let currentUser = !!localStorage.token;
   let isRequireAuth = to.meta?.auth || false;
   let isRequireNoAuth = to.meta?.noauth || false;

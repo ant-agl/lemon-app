@@ -41,13 +41,43 @@ export const routes = [
   },
   {
     path: "/",
-    name: "home",
+    name: "timer",
     meta: {
-      title: "Home",
+      title: "Таймер",
       layout: "main",
       auth: true,
     },
-    component: () => import("@/views/HomeView.vue"),
+    component: () => import("@/views/TimerView.vue"),
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    meta: {
+      title: "Профиль",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/ProfileView.vue"),
+  },
+  {
+    path: "/settings",
+    name: "settings",
+    meta: {
+      title: "Настройки",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/SettingsView.vue"),
+  },
+  {
+    path: "/companies",
+    name: "companies",
+    meta: {
+      title: "Мои компании",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/CompaniesView.vue"),
   },
   {
     path: "/404",

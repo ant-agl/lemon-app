@@ -21,15 +21,38 @@ export default {
   background-color: var(--main-color);
   padding: 12px 30px;
   border: none;
-  border-radius: 30px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
-  width: 100%;
   height: 48px;
   font-weight: 600;
-  transition: background-color 0.3s;
+  transition: box-shadow 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  :deep(img) {
+    min-width: 18px;
+    max-width: 18px;
+  }
+
   &:hover {
-    background-color: var(--main-color-hover);
+    // background-color: var(--main-color-hover);
+    box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.2) inset;
+  }
+
+  &.full-w {
+    width: 100%;
+  }
+  &.cancel {
+    background-color: #d0d0d0;
+  }
+  &.dangerBgDark {
+    background-color: var(--bg-danger-dark);
+  }
+  &.shadow {
+    box-shadow: var(--shadow-btn);
   }
 }
 </style>

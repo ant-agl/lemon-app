@@ -21,7 +21,7 @@
         <AppInput
           placeholder="E-mail"
           type="text"
-          :icon="require('@/assets/icons/emailicon.svg')"
+          :icon="require('@/assets/img/icons/emailicon.svg')"
           :error="v$.email.$error"
           :errorText="errorEmail"
           v-model="email"
@@ -29,7 +29,7 @@
         <AppInput
           placeholder="Пароль"
           type="password"
-          :icon="require('@/assets/icons/password.svg')"
+          :icon="require('@/assets/img/icons/password.svg')"
           :error="v$.password.$error"
           :errorText="errorPassword"
           v-model="password"
@@ -39,7 +39,7 @@
       <p class="forgot-password">
         <router-link to="/forgot" class="link">Забыли пароль?</router-link>
       </p>
-      <AppBtn>Войти</AppBtn>
+      <AppBtn class="full-w">Войти</AppBtn>
 
       <p class="privacy-policy-text">
         Авторизуясь, вы соглашаетесь с
@@ -66,8 +66,6 @@ import IconYandex from "@/components/icons/IconYandex";
 
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
-
-import api from "@/axios/api";
 
 export default {
   setup() {
@@ -119,16 +117,15 @@ export default {
         password: this.password,
       };
       console.log(data);
-      api
-        .post("/login", data)
-        .then((response) => {
-          console.log("login", response);
 
-          this.$router.push("/");
+      this.$store
+        .dispatch("login", data)
+        .then(() => {
+          this.$store.dispatch("getUserData").then(() => {
+            this.$router.push("/");
+          });
         })
-        .catch((error) => {
-          console.log("login error", error);
-        });
+        .catch(() => {});
     },
   },
 };

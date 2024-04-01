@@ -21,7 +21,7 @@
         <AppInput
           placeholder="Имя и фамилия"
           type="text"
-          :icon="require('@/assets/icons/name.svg')"
+          :icon="require('@/assets/img/icons/name.svg')"
           :error="v$.name.$error"
           :errorText="errorName"
           v-model="name"
@@ -29,7 +29,7 @@
         <AppInput
           placeholder="E-mail"
           type="text"
-          :icon="require('@/assets/icons/emailicon.svg')"
+          :icon="require('@/assets/img/icons/emailicon.svg')"
           :error="v$.email.$error"
           :errorText="errorEmail"
           v-model="email"
@@ -37,13 +37,13 @@
         <AppInput
           placeholder="Пароль"
           type="password"
-          :icon="require('@/assets/icons/password.svg')"
+          :icon="require('@/assets/img/icons/password.svg')"
           :error="v$.password.$error"
           :errorText="errorPassword"
           v-model="password"
         />
       </div>
-      <AppBtn>Создать аккаунт</AppBtn>
+      <AppBtn class="full-w">Создать аккаунт</AppBtn>
 
       <p class="privacy-policy-text">
         Регистрируясь, вы соглашаетесь с
@@ -70,8 +70,6 @@ import IconYandex from "@/components/icons/IconYandex";
 
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, helpers } from "@vuelidate/validators";
-
-import api from "@/axios/api";
 
 const validName = (value) => {
   if (!helpers.req(value)) {
@@ -143,16 +141,12 @@ export default {
       };
       console.log(data);
 
-      api
-        .post("/registration", data)
-        .then((response) => {
-          console.log("registration", response);
-          this.$store.commit("setUserData", { email: this.email });
+      this.$store
+        .dispatch("registration", data)
+        .then(() => {
           this.$router.push("/verify");
         })
-        .catch((error) => {
-          console.log("registration error", error);
-        });
+        .catch(() => {});
     },
   },
 };
