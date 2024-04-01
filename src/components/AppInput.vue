@@ -66,7 +66,7 @@ export default {
 <style scoped lang="scss">
 .input {
   &.dark-bg {
-    input {
+    &:not(:focus-within) input {
       color: #fff;
     }
     .input__error {
@@ -84,7 +84,7 @@ export default {
     background: var(--bg-input);
     width: 100%;
     transition: 0.2s;
-    &:focus {
+    &:focus-within {
       background: #f8faca;
     }
   }
