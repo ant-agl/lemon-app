@@ -25,6 +25,7 @@ export default {
     this.$store
       .dispatch("getUserData")
       .catch(() => {
+        delete localStorage.token;
         if (this.$route.meta?.auth) this.$router.push("/login");
         if (this.$route.meta?.noauth) this.$router.push("/");
       })

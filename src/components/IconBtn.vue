@@ -24,5 +24,13 @@
     transform: translateY(-2px);
     box-shadow: 0 0 25px 0 rgba(31, 31, 31, 0.5);
   }
+
+  &.white {
+    background-color: #fff;
+
+    &:hover {
+      background-color: var(--light-gray-color);
+    }
+  }
 }
 </style>

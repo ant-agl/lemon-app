@@ -73,22 +73,24 @@ export default {
   transition: 0.3s;
   opacity: 0;
   z-index: -1;
+  box-sizing: border-box;
 }
 .modal__content {
   background-color: var(--dark-color-2);
   border-radius: 15px;
   padding: 40px 60px;
   position: relative;
-  width: 95%;
-  max-width: 400px;
+  max-width: 95%;
+  width: 520px;
   transition: 0.3s;
   transform: scale(0.9);
   max-height: 90vh;
   overflow-y: auto;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 .middle .modal__content {
-  max-width: 508px;
+  width: 628px;
 }
 .big .modal__content {
   max-width: 1024px;
@@ -142,5 +144,10 @@ export default {
   justify-content: flex-end;
   gap: 12px;
   margin-top: 24px;
+}
+:deep(.modal__row) {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
 }
 </style>

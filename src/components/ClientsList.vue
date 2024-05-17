@@ -1,43 +1,39 @@
 <template>
   <div class="companies">
-    <router-link
-      v-for="company in companies"
-      :key="company.id"
-      :to="`companies/${company.company_id}`"
+    <div class="companies__header">
+      <div class="companies__th">Имя</div>
+      <div class="companies__th">Прибыль с клиента</div>
+    </div>
+    <div
+      v-for="client in clients"
+      :key="client.id"
       class="companies__item"
+      @click.prevent="$emit('edit', client)"
     >
-      <div class="companies__title">{{ company.company_name }}</div>
-      <div class="companies__position">{{ company.role }}</div>
+      <div class="companies__title">{{ client.name }}</div>
+      <div class="companies__position">
+        {{ client.profit.toLocaleString() }} руб.
+      </div>
       <div class="companies__btns">
-        <router-link
-          :to="`/companies/${company.company_id}/clients`"
-          class="companies__btn"
-        >
-          <img src="@/assets/img/icons/clients.svg" alt="Clients" />
-        </router-link>
-        <router-link
+        <!-- <router-link
           :to="`/companies/${company.company_id}/team`"
           class="companies__btn"
         >
           <img src="@/assets/img/icons/users.svg" alt="Team" />
-        </router-link>
-        <button
-          v-if="companies.length > 1"
-          class="companies__btn"
-          @click.prevent="$emit('delete', company.company_id)"
-        >
+        </router-link> -->
+        <button class="companies__btn" @click.stop="$emit('delete', client)">
           <img src="@/assets/img/icons/trash.svg" alt="Trash" />
         </button>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  emits: ["delete"],
+  emits: ["delete", "edit"],
   props: {
-    companies: {
+    clients: {
       type: Array,
       required: true,
     },
@@ -50,7 +46,23 @@ export default {
   background-color: var(--dark-color-2);
   border-radius: 20px;
   overflow: hidden;
+  color: #fff;
   box-shadow: var(--shadow-dark-items);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 12px 30px;
+    gap: 20px;
+    position: relative;
+    border-bottom: 1px solid #b3b2b2;
+  }
+  &__th {
+    font-size: 16px;
+    &:nth-child(1) {
+      width: 300px;
+    }
+  }
 
   &__item {
     display: flex;
@@ -77,14 +89,11 @@ export default {
     }
   }
   &__title {
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 18px;
     width: 300px;
-    color: #fff;
   }
   &__position {
     font-size: 18px;
-    color: #fff;
   }
   &__btns {
     display: flex;

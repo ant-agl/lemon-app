@@ -99,6 +99,7 @@ export default {
           commit("setUserData", {
             login: response.data.data.login,
             name: response.data.data.name,
+            id: response.data.data.id,
           });
 
           return response.data;
@@ -108,10 +109,10 @@ export default {
           return Promise.reject(error);
         });
     },
-    logout({ commit }) {
+    logout({ dispatch }) {
       delete localStorage.token;
       api.defaults.headers["X-Auth-Token"] = "";
-      commit("setUserData", {});
+      dispatch("clearData");
     },
   },
 };

@@ -1,5 +1,6 @@
 <template>
   <div class="input" :class="{ error }">
+    <h6 v-if="title" class="input__title">{{ title }}</h6>
     <label class="input__container">
       <img v-if="icon" :src="icon" class="input__icon" />
       <input
@@ -7,6 +8,7 @@
         :placeholder="placeholder"
         :value="modelValue"
         @input="handleInput($event.target.value)"
+        @change="handleInput($event.target.value)"
         :style="{ paddingLeft, paddingRight }"
       />
       <img
@@ -17,6 +19,11 @@
             currentType == 'password' ? 'close' : 'open'
           }.svg`)
         "
+        class="input__icon input__icon_password"
+      />
+      <img
+        v-if="iconRight"
+        :src="iconRight"
         class="input__icon input__icon_password"
       />
     </label>
@@ -32,8 +39,10 @@ export default {
     placeholder: String,
     modelValue: [String, Number],
     icon: String,
+    iconRight: String,
     error: Boolean,
     errorText: String,
+    title: String,
   },
   data() {
     return {
@@ -65,13 +74,29 @@ export default {
 
 <style scoped lang="scss">
 .input {
+  width: 100%;
+
   &.dark-bg {
-    &:not(:focus-within) input {
-      color: #fff;
+    &:focus-within,
+    &.error {
+      .input__icon {
+        filter: brightness(0);
+      }
+    }
+    &:not(:focus-within, .error) {
+      input {
+        color: #fff;
+      }
     }
     .input__error {
       color: var(--color-danger-dark);
     }
+  }
+
+  &__title {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
   }
 
   &__container {
@@ -89,7 +114,6 @@ export default {
     }
   }
   input {
-    flex: 1;
     border: none;
     outline: none;
     padding: 12px 20px;
@@ -97,12 +121,14 @@ export default {
     color: #454444;
     font-size: 16px;
     line-height: 24px;
+    width: 100%;
   }
   &__icon {
     position: absolute;
     left: 14px;
     width: 24px;
     height: 24px;
+    transition: 0.2s;
     &_password {
       cursor: pointer;
       left: auto;

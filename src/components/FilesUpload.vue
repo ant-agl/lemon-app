@@ -7,12 +7,12 @@
     @dragover.prevent
   >
     <img src="@/assets/img/icons/upload.svg" alt="Upload" />
-    <p class="upload__desc">Загрузить фото</p>
+    <p class="upload__desc">{{ text }}</p>
 
     <input
       class="upload__input"
       type="file"
-      accept="image/*"
+      :accept="accept"
       multiple
       @change="$emit('upload', $event.target.files)"
     />
@@ -32,7 +32,7 @@
       <input
         class="upload__input"
         type="file"
-        accept="image/*"
+        :accept="accept"
         multiple
         @change="$emit('upload', $event.target.files)"
     /></label>
@@ -65,6 +65,14 @@ export default {
       type: Array,
       default: () => [],
     },
+    accept: {
+      type: String,
+      default: "*",
+    },
+    text: {
+      type: String,
+      default: "Загрузить фото",
+    },
   },
   methods: {
     getUrlFromFile(file) {
@@ -85,6 +93,7 @@ export default {
   gap: 4px;
   cursor: pointer;
   transition: 0.2s;
+
   &:hover {
     background-color: #9f9f9f;
   }
@@ -142,6 +151,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    background-color: #c0c0c0;
 
     &::before {
       content: "";

@@ -48,6 +48,11 @@ export default {
       align-items: center;
       justify-content: space-between;
     }
+    :deep(.header__btns) {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
     :deep(.wrap-btns) {
       display: flex;
       align-items: center;

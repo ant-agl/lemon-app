@@ -152,7 +152,7 @@ export default {
     overflow: hidden;
   }
   &__name {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 500;
     color: #fff;
     line-height: 1.1;

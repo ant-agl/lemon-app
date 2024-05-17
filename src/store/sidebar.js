@@ -11,6 +11,11 @@ export default {
         label: "Компании",
         link: "/companies",
       },
+      {
+        icon: require("@/assets/img/icons/chart.svg"),
+        label: "Отчеты",
+        link: "/report",
+      },
     ],
   },
   getters: {

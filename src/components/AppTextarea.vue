@@ -1,5 +1,6 @@
 <template>
   <div class="input" :class="{ error }">
+    <h6 v-if="title" class="input__title">{{ title }}</h6>
     <label class="input__container">
       <textarea
         :placeholder="placeholder"
@@ -21,6 +22,7 @@ export default {
     icon: String,
     error: Boolean,
     errorText: String,
+    title: String,
   },
   data() {
     return {
@@ -54,12 +56,18 @@ export default {
 <style scoped lang="scss">
 .input {
   &.dark-bg {
-    &:not(:focus-within) textarea {
+    &:not(:focus-within, .error) textarea {
       color: #fff;
     }
     .input__error {
       color: var(--color-danger-dark);
     }
+  }
+
+  &__title {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
   }
 
   &__container {

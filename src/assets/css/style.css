@@ -1,3 +1,5 @@
+@import "vars";
+
 body,
 body * {
   font-family: "Nunito", sans-serif;
@@ -16,28 +18,6 @@ body *:focus-visible {
 
 img {
   max-width: 100%;
-}
-
-:root {
-  --main-color: #e7ef59;
-  --main-color-hover: #c4cf03;
-  --main-light-color: #f3f2e0;
-  --dark-color: #25231f;
-  --dark-color-2: #313131;
-  --dark-color-hover: #393939;
-  --light-gray-color: #eaeaea;
-  --secondary-color: #878d28;
-  --error-bg: #eed5d5;
-  --error-color: #931818;
-  --bg-input: rgba(160, 160, 160, 0.15);
-  --bg-danger-dark: #f19879;
-  --color-danger-dark: #ff9292;
-  --divide-list-center: linear-gradient(90deg,
-      rgba(77, 76, 76, 0) 0%,
-      rgba(179, 178, 178, 1) 50%,
-      rgba(77, 76, 76, 0) 100%);
-  --shadow-btn: 0 0 25px 0 rgba(0, 0, 0, 0.2);
-  --shadow-dark-items: 0 4px 50px 0 rgba(0, 0, 0, 0.25);
 }
 
 .link {
@@ -73,11 +53,7 @@ img {
 }
 
 .v-enter-active {
-  transition: opacity 0.5s ease;
-  -webkit-transition: opacity 0.5s ease;
-  -moz-transition: opacity 0.5s ease;
-  -ms-transition: opacity 0.5s ease;
-  -o-transition: opacity 0.5s ease;
+  transition: opacity 0.3s ease;
 }
 
 .v-enter-from,
@@ -89,4 +65,24 @@ img {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.form__footer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.show {
+  animation: showIn 0.3s ease both;
+}
+
+@keyframes showIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

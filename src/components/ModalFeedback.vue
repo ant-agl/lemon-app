@@ -21,7 +21,12 @@
         errorText="Поле не заполнено"
       />
 
-      <FilesUpload :files="files" @upload="upload" @removeFile="removeFile" />
+      <FilesUpload
+        :files="files"
+        accept="image/*"
+        @upload="upload"
+        @removeFile="removeFile"
+      />
 
       <AppBtn class="full-w">Отправить</AppBtn>
     </form>

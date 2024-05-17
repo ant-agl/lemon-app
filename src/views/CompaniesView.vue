@@ -5,12 +5,15 @@
 
   <CompaniesList
     v-if="!loading"
+    class="show"
     :companies="companies"
     @delete="
       deleteId = $event;
       modalDelete = true;
     "
   />
+
+  <AppLoader v-else />
 
   <div class="wrap-btns">
     <AppBtn @click.prevent="modalNewCompany = true" class="shadow">
@@ -25,7 +28,7 @@
     @close="modalDelete = false"
     @delete="deleteCompany"
   >
-    <p>Удалить компанию {{ deleteId }}?</p>
+    <p>Удалить компанию {{ companyDeleted.company_name }}?</p>
   </ModalDelete>
 </template>
 
@@ -34,11 +37,18 @@ import CompaniesList from "@/components/CompaniesList";
 import AppBtn from "@/components/AppBtn";
 import ModalNewCompany from "@/components/ModalNewCompany";
 import ModalDelete from "@/components/ModalDelete";
+import AppLoader from "@/components/AppLoader";
 
 import { mapGetters } from "vuex";
 
 export default {
-  components: { CompaniesList, AppBtn, ModalNewCompany, ModalDelete },
+  components: {
+    CompaniesList,
+    AppBtn,
+    ModalNewCompany,
+    ModalDelete,
+    AppLoader,
+  },
   data: () => ({
     loading: true,
     modalNewCompany: false,
@@ -47,6 +57,9 @@ export default {
   }),
   computed: {
     ...mapGetters(["companies"]),
+    companyDeleted() {
+      return this.companies.find((c) => c.company_id == this.deleteId) ?? "";
+    },
   },
   methods: {
     deleteCompany() {

@@ -1,46 +1,45 @@
 <template>
   <div class="companies">
-    <router-link
-      v-for="company in companies"
-      :key="company.id"
-      :to="`companies/${company.company_id}`"
+    <div
+      v-for="employee in team"
+      :key="employee.id"
       class="companies__item"
+      @click.prevent="$emit('edit', employee)"
     >
-      <div class="companies__title">{{ company.company_name }}</div>
-      <div class="companies__position">{{ company.role }}</div>
+      <div class="companies__title">{{ employee.name }}</div>
+      <div class="companies__position">{{ employee.role }}</div>
       <div class="companies__btns">
-        <router-link
-          :to="`/companies/${company.company_id}/clients`"
-          class="companies__btn"
-        >
-          <img src="@/assets/img/icons/clients.svg" alt="Clients" />
-        </router-link>
-        <router-link
+        <!-- <router-link
           :to="`/companies/${company.company_id}/team`"
           class="companies__btn"
         >
           <img src="@/assets/img/icons/users.svg" alt="Team" />
-        </router-link>
+        </router-link> -->
         <button
-          v-if="companies.length > 1"
+          v-if="employee.id != userData.id"
           class="companies__btn"
-          @click.prevent="$emit('delete', company.company_id)"
+          @click.stop="$emit('delete', employee)"
         >
           <img src="@/assets/img/icons/trash.svg" alt="Trash" />
         </button>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  emits: ["delete"],
+  emits: ["delete", "edit"],
   props: {
-    companies: {
+    team: {
       type: Array,
       required: true,
     },
+  },
+  computed: {
+    ...mapGetters(["userData"]),
   },
 };
 </script>
@@ -50,6 +49,7 @@ export default {
   background-color: var(--dark-color-2);
   border-radius: 20px;
   overflow: hidden;
+  color: #fff;
   box-shadow: var(--shadow-dark-items);
 
   &__item {
@@ -80,11 +80,9 @@ export default {
     font-size: 22px;
     font-weight: 500;
     width: 300px;
-    color: #fff;
   }
   &__position {
     font-size: 18px;
-    color: #fff;
   }
   &__btns {
     display: flex;

@@ -1,30 +1,35 @@
 <template>
+  <h5 class="title-table">Список проектов</h5>
   <div class="companies">
+    <div class="companies__header">
+      <div class="companies__th"></div>
+      <div class="companies__th">Проект</div>
+      <div class="companies__th">Клиент</div>
+    </div>
     <router-link
-      v-for="company in companies"
-      :key="company.id"
-      :to="`companies/${company.company_id}`"
+      v-for="project in projects"
+      :key="project.id"
+      :to="`/companies/${$route.params.companyId}/${project.id}/tasks`"
       class="companies__item"
     >
-      <div class="companies__title">{{ company.company_name }}</div>
-      <div class="companies__position">{{ company.role }}</div>
+      <div
+        class="companies__color"
+        :style="{ backgroundColor: project.color }"
+      ></div>
+      <div class="companies__title">{{ project.name }}</div>
+      <div class="companies__position">
+        {{ getClient(project.client_id).name }}
+      </div>
       <div class="companies__btns">
         <router-link
-          :to="`/companies/${company.company_id}/clients`"
+          :to="`/companies/${$route.params.companyId}/${project.id}`"
           class="companies__btn"
         >
-          <img src="@/assets/img/icons/clients.svg" alt="Clients" />
-        </router-link>
-        <router-link
-          :to="`/companies/${company.company_id}/team`"
-          class="companies__btn"
-        >
-          <img src="@/assets/img/icons/users.svg" alt="Team" />
+          <img src="@/assets/img/icons/edit.svg" alt="Редактировать" />
         </router-link>
         <button
-          v-if="companies.length > 1"
           class="companies__btn"
-          @click.prevent="$emit('delete', company.company_id)"
+          @click.stop.prevent="$emit('delete', project)"
         >
           <img src="@/assets/img/icons/trash.svg" alt="Trash" />
         </button>
@@ -34,23 +39,60 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   emits: ["delete"],
   props: {
-    companies: {
+    projects: {
       type: Array,
       required: true,
+    },
+  },
+  computed: {
+    ...mapGetters(["clients"]),
+    currentClients() {
+      return this.clients[this.$route.params.companyId];
+    },
+  },
+  methods: {
+    getClient(id) {
+      return this.currentClients.find((c) => c.id == id) ?? {};
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.title-table {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
 .companies {
   background-color: var(--dark-color-2);
   border-radius: 20px;
   overflow: hidden;
+  color: #fff;
   box-shadow: var(--shadow-dark-items);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 12px 30px;
+    gap: 20px;
+    position: relative;
+    border-bottom: 1px solid #b3b2b2;
+  }
+  &__th {
+    font-size: 16px;
+    &:nth-child(1) {
+      width: 20px;
+    }
+    &:nth-child(2) {
+      width: 200px;
+    }
+  }
 
   &__item {
     display: flex;
@@ -59,6 +101,7 @@ export default {
     gap: 20px;
     position: relative;
     transition: 0.2s;
+    color: #fff;
     cursor: pointer;
 
     &:hover {
@@ -76,15 +119,17 @@ export default {
       background: var(--divide-list-center);
     }
   }
+  &__color {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+  }
   &__title {
-    font-size: 22px;
-    font-weight: 500;
-    width: 300px;
-    color: #fff;
+    font-size: 18px;
+    width: 200px;
   }
   &__position {
     font-size: 18px;
-    color: #fff;
   }
   &__btns {
     display: flex;

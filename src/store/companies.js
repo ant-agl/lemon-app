@@ -2,7 +2,44 @@ import api from "@/axios/api";
 
 export default {
   state: {
-    companies: [],
+    companies: [
+      {
+        id: "30",
+        company_id: "42",
+        company_name: "Моя компания",
+        user_id: "115",
+        role: "Владелец",
+        salary: "0",
+        salary_type: "0",
+        description: "",
+        date: "31.03.2024",
+        is_delete: "0",
+      },
+      {
+        id: "36",
+        company_id: "48",
+        company_name: "Лимон",
+        user_id: "115",
+        role: "Владелец",
+        salary: "0",
+        salary_type: "0",
+        description: "",
+        date: "01.04.2024",
+        is_delete: "0",
+      },
+      {
+        id: "43",
+        company_id: "55",
+        company_name: "Rubikon",
+        user_id: "115",
+        role: "Владелец",
+        salary: "0",
+        salary_type: "0",
+        description: "",
+        date: "01.04.2024",
+        is_delete: "0",
+      },
+    ],
   },
   getters: {
     companies: (s) => s.companies,
@@ -40,8 +77,8 @@ export default {
         .then((response) => {
           console.log("createCompanies", response.data);
           commit("addCompany", {
-            company_id: new Date().getTime(),
-            name,
+            company_id: response.data.data.id,
+            company_name: name,
             role: "Владелец",
           });
 

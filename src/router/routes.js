@@ -70,6 +70,16 @@ export const routes = [
     component: () => import("@/views/SettingsView.vue"),
   },
   {
+    path: "/report",
+    name: "report",
+    meta: {
+      title: "Отчеты",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/ReportView.vue"),
+  },
+  {
     path: "/companies",
     name: "companies",
     meta: {
@@ -78,6 +88,66 @@ export const routes = [
       auth: true,
     },
     component: () => import("@/views/CompaniesView.vue"),
+  },
+  {
+    path: "/companies/:companyId",
+    name: "company",
+    meta: {
+      title: "Компания",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/CompanyView.vue"),
+  },
+  {
+    path: "/companies/:companyId/team",
+    name: "team",
+    meta: {
+      title: "Команда",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/TeamView.vue"),
+  },
+  {
+    path: "/companies/:companyId/clients",
+    name: "clients",
+    meta: {
+      title: "Клиенты",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/ClientsView.vue"),
+  },
+  {
+    path: "/companies/:companyId/:projectId(\\d+)",
+    name: "project",
+    meta: {
+      title: "Проект",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/ProjectView.vue"),
+  },
+  {
+    path: "/companies/:companyId/:projectId(\\d+)/tasks",
+    name: "tasks",
+    meta: {
+      title: "Список задач",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/TasksView.vue"),
+  },
+  {
+    path: "/companies/:companyId/:projectId(\\d+)/tasks/:taskId",
+    name: "task",
+    meta: {
+      title: "Задача",
+      layout: "main",
+      auth: true,
+    },
+    component: () => import("@/views/TaskView.vue"),
   },
   {
     path: "/404",
